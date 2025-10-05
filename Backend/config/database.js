@@ -1,87 +1,46 @@
-const mysql = require('mysql2');
+const { Pool } = require('pg');
 require('dotenv').config();
 
-// First create connection without database
-const initConnection = mysql.createConnection({
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || ''
-});
-
-// Create database if it doesn't exist
-initConnection.query('CREATE DATABASE IF NOT EXISTS edusuccess', (err) => {
-  if (err) {
-    console.error('Error creating database:', err);
-  } else {
-    console.log('Database edusuccess created or already exists');
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
   }
 });
 
-initConnection.end();
+// Create tables if they don't exist
+const createTables = `
+  CREATE TABLE IF NOT EXISTS users (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    phone VARCHAR(20) NOT NULL,
+    institution VARCHAR(255) NOT NULL,
+    education_level VARCHAR(50) CHECK (education_level IN ('HND', 'B.Tech', 'BSc', 'Masters')) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+  );
 
-// Now create connection pool with database
-const connection = mysql.createPool({
-  host: process.env.DB_HOST || 'localhost',
-  user: process.env.DB_USER || 'root',
-  password: process.env.DB_PASSWORD || '',
-  database: process.env.DB_NAME || 'edusuccess',
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
+  CREATE TABLE IF NOT EXISTS service_requests (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    service_type VARCHAR(50) CHECK (service_type IN ('cv', 'design', 'writing')) NOT NULL,
+    service_data TEXT NOT NULL,
+    total_price DECIMAL(10,2) NOT NULL,
+    status VARCHAR(50) CHECK (status IN ('pending', 'in_progress', 'completed', 'cancelled')) DEFAULT 'pending',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+  );
+`;
+
+pool.query(createTables, (err) => {
+  if (err) {
+    console.error('Error creating tables:', err);
+  } else {
+    console.log('PostgreSQL tables created or already exist');
+  }
 });
 
-// Create tables one by one
-function createTables() {
-  // Users table
-  const usersTable = `
-    CREATE TABLE IF NOT EXISTS users (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      name VARCHAR(255) NOT NULL,
-      email VARCHAR(255) UNIQUE NOT NULL,
-      phone VARCHAR(20) NOT NULL,
-      institution VARCHAR(255) NOT NULL,
-      education_level ENUM('HND', 'B.Tech', 'BSc', 'Masters') NOT NULL,
-      password VARCHAR(255) NOT NULL,
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-    )
-  `;
-
-  // Service requests table
-  const serviceRequestsTable = `
-    CREATE TABLE IF NOT EXISTS service_requests (
-      id INT AUTO_INCREMENT PRIMARY KEY,
-      user_id INT NOT NULL,
-      service_type ENUM('cv', 'design', 'writing') NOT NULL,
-      service_data TEXT NOT NULL,
-      total_price DECIMAL(10,2) NOT NULL,
-      status ENUM('pending', 'in_progress', 'completed', 'cancelled') DEFAULT 'pending',
-      created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-      updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-      FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-    )
-  `;
-
-  // Execute users table creation
-  connection.query(usersTable, (err) => {
-    if (err) {
-      console.error('Error creating users table:', err);
-      return;
-    }
-    console.log('Users table created or already exists');
-
-    // Execute service_requests table creation after users table
-    connection.query(serviceRequestsTable, (err) => {
-      if (err) {
-        console.error('Error creating service_requests table:', err);
-        return;
-      }
-      console.log('Service requests table created or already exists');
-    });
-  });
-}
-
-// Call the function to create tables
-createTables();
-
-module.exports = connection;
+module.exports = pool;
