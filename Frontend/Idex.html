@@ -1,0 +1,2249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EduSuccess | Academic Support for Cameroonian Students</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c5aa0;
+            --secondary: #f8a41c;
+            --accent: #009688;
+            --light: #f5f7fa;
+            --dark: #333;
+            --success: #4caf50;
+            --danger: #f44336;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --radius: 8px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            color: var(--primary);
+            font-size: 28px;
+        }
+
+        .logo h1 {
+            font-size: 24px;
+            color: var(--primary);
+        }
+
+        .logo span {
+            color: var(--secondary);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--primary);
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border-radius: var(--radius);
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #1e3d72;
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-secondary {
+            background-color: var(--secondary);
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #d98e0a;
+        }
+
+        .btn-success {
+            background-color: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background-color: #3d8b40;
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 90, 160, 0.85), rgba(44, 90, 160, 0.9)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+
+        .hero h2 {
+            font-size: 42px;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 {
+            font-size: 32px;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: white;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .service-icon {
+            background-color: var(--primary);
+            color: white;
+            padding: 25px;
+            text-align: center;
+            font-size: 40px;
+        }
+
+        .service-content {
+            padding: 25px;
+        }
+
+        .service-content h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .service-content p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            background-color: white;
+            padding: 80px 0;
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .step {
+            flex: 1;
+            min-width: 250px;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 0 auto 20px;
+        }
+
+        .step h3 {
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 80px 0;
+            background-color: #f0f4f8;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: var(--primary);
+        }
+
+        .author-info h4 {
+            color: var(--primary);
+        }
+
+        .author-info p {
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+            border-radius: var(--radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .faq-question {
+            background-color: white;
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 600;
+        }
+
+        .faq-question i {
+            transition: transform 0.3s;
+        }
+
+        .faq-answer {
+            background-color: #f9f9f9;
+            padding: 0 20px;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 20px;
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        /* CTA Section */
+        .cta {
+            background: linear-gradient(rgba(248, 164, 28, 0.9), rgba(248, 164, 28, 0.9)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .cta h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .cta p {
+            max-width: 700px;
+            margin: 0 auto 30px;
+            font-size: 18px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #1a2b4c;
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: var(--secondary);
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column a:hover {
+            color: var(--secondary);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .social-links a:hover {
+            background-color: var(--secondary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+            color: #aaa;
+        }
+
+        /* Chatbot */
+        .chatbot-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 1000;
+        }
+
+        .chatbot-icon {
+            width: 60px;
+            height: 60px;
+            background-color: var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s;
+        }
+
+        .chatbot-icon:hover {
+            transform: scale(1.1);
+        }
+
+        .chatbot-window {
+            position: absolute;
+            bottom: 80px;
+            right: 0;
+            width: 350px;
+            height: 450px;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .chatbot-header {
+            background-color: var(--primary);
+            color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chatbot-header h3 {
+            font-size: 18px;
+        }
+
+        .chatbot-close {
+            cursor: pointer;
+            font-size: 20px;
+        }
+
+        .chatbot-messages {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .message {
+            padding: 10px 15px;
+            border-radius: 18px;
+            max-width: 80%;
+            font-size: 14px;
+        }
+
+        .bot-message {
+            background-color: #f0f0f0;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        .user-message {
+            background-color: var(--primary);
+            color: white;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .chatbot-input {
+            display: flex;
+            padding: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .chatbot-input input {
+            flex: 1;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 30px;
+            outline: none;
+        }
+
+        .chatbot-input button {
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            overflow-y: auto;
+            padding: 20px 0;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 700px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            margin: auto;
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .modal-header h2 {
+            color: var(--primary);
+        }
+
+        .modal-close {
+            font-size: 24px;
+            cursor: pointer;
+            color: #777;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: var(--radius);
+            font-size: 16px;
+        }
+
+        .form-group textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .form-row .form-group {
+            flex: 1;
+        }
+
+        .service-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .service-option {
+            border: 2px solid #ddd;
+            border-radius: var(--radius);
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .service-option.selected {
+            border-color: var(--primary);
+            background-color: rgba(44, 90, 160, 0.05);
+        }
+
+        .service-option h4 {
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        .price-display {
+            background-color: #f0f4f8;
+            padding: 20px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .price-display h3 {
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .price-amount {
+            font-size: 32px;
+            font-weight: bold;
+            color: var(--success);
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: #777;
+            margin-right: 10px;
+        }
+
+        .discount-badge {
+            background-color: var(--secondary);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+
+        .invoice-preview {
+            background-color: #f9f9f9;
+            padding: 20px;
+            border-radius: var(--radius);
+            margin: 20px 0;
+            border: 1px solid #ddd;
+        }
+
+        .invoice-preview h3 {
+            color: var(--primary);
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        .invoice-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .invoice-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 0;
+            font-weight: bold;
+            font-size: 18px;
+            border-top: 2px solid var(--primary);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            .hero h2 {
+                font-size: 32px;
+            }
+
+            .steps {
+                flex-direction: column;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                width: 100%;
+                text-align: center;
+                margin-top: 15px;
+            }
+
+            .nav-menu.active {
+                display: block;
+            }
+
+            .nav-menu ul {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                <h1>Edu<span>Success</span></h1>
+            </div>
+            
+            <div class="mobile-menu">
+                <i class="fas fa-bars"></i>
+            </div>
+            
+            <nav class="nav-menu">
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
+                    <li><a href="#testimonials">Testimonials</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            
+            <div class="auth-buttons">
+                <button class="btn btn-outline" id="loginBtn">Login</button>
+                <button class="btn btn-primary" id="registerBtn">Register</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container">
+            <h2>Your Academic Success Partner</h2>
+            <p>Professional support for CVs, resumes, projects, and internship reports. We help HND, B.Tech, BSc, and Masters students achieve academic excellence.</p>
+            <button class="btn btn-secondary" id="heroGetStarted">Get Started Today</button>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Services</h2>
+                <p>Comprehensive academic support tailored for Cameroonian students</p>
+            </div>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>CV, Resume & Cover Letter Design</h3>
+                        <p>Professional document creation that highlights your skills and experience to impress employers.</p>
+                        <button class="btn btn-primary service-btn" data-service="cv">Get Started</button>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Project Design & Development</h3>
+                        <p>Complete project design services for HND, Degree, and Masters students in various fields.</p>
+                        <button class="btn btn-primary service-btn" data-service="design">Get Started</button>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">
+                        <i class="fas fa-pencil-alt"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Project & Report Writing</h3>
+                        <p>Professional writing services for academic projects, research papers, and internship reports.</p>
+                        <button class="btn btn-primary service-btn" data-service="writing">Get Started</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="container">
+            <div class="section-title">
+                <h2>How It Works</h2>
+                <p>Simple steps to get the academic support you need</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Register & Choose Service</h3>
+                    <p>Create your account and select the service you need from our categories.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Provide Details</h3>
+                    <p>Fill out the form with your project details, educational level, and requirements.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Make Payment</h3>
+                    <p>Secure payment via mobile money with multiple options available.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Receive Support</h3>
+                    <p>Get professional assistance and one-on-one mentorship for your project.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <div class="section-title">
+                <h2>Success Stories</h2>
+                <p>What our students say about their experience with EduSuccess</p>
+            </div>
+            
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "EduSuccess helped me design an impressive CV that landed me three job interviews within two weeks. Their professional approach made all the difference!"
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">AM</div>
+                        <div class="author-info">
+                            <h4>Arlette Mbong</h4>
+                            <p>BSc Computer Science, University of Buea</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "My HND internship report was professionally written and well-structured. I received an A grade and valuable feedback from my supervisor."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">EN</div>
+                        <div class="author-info">
+                            <h4>Eric Ngan</h4>
+                            <p>HND Software Engineering, ISTA</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="testimonial-text">
+                        "The project design service helped me create a comprehensive final year project that impressed my examiners. The mentorship was invaluable for my defense preparation."
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SN</div>
+                        <div class="author-info">
+                            <h4>Sarah Nji</h4>
+                            <p>Masters in IT, University of Yaoundé I</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq" id="faq">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+                <p>Find answers to common questions about our services</p>
+            </div>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        How long does it take to complete a project?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        The timeline depends on the complexity and scope of your project. Generally, CV/resume services take 2-3 days, while projects may take 2-4 weeks. We provide a specific timeline after reviewing your requirements.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What payment methods do you accept?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        We accept mobile money payments through MTN Mobile Money and Orange Money. Payment is required before we begin work on your project.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Can I request revisions?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Yes, we offer up to 3 rounds of revisions for all our services to ensure you're completely satisfied with the final product.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Do you guarantee good grades?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        While we provide high-quality work following academic standards and guidelines, final grades depend on multiple factors including your institution's specific requirements and your defense performance.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Is my personal information kept confidential?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        Absolutely. We have a strict privacy policy and never share your personal information or project details with third parties.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Achieve Academic Excellence?</h2>
+            <p>Join thousands of Cameroonian students who have successfully graduated with our professional support</p>
+            <button class="btn btn-primary" id="ctaGetStarted">Get Started Now</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>EduSuccess</h3>
+                    <p>Your trusted academic partner in Cameroon, helping students achieve their educational goals through professional support services.</p>
+                    <div class="social-links">
+                        <!--_<a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a> -->
+                        <a href="https://wa.me/237686940697"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#how-it-works">How It Works</a></li>
+                        <li><a href="#testimonials">Testimonials</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul>
+                        <li><a href="#" class="service-link" data-service="cv">CV & Resume Design</a></li>
+                        <li><a href="#" class="service-link" data-service="design">Project Design</a></li>
+                        <li><a href="#" class="service-link" data-service="writing">Project Writing</a></li>
+                        <li><a href="#" class="service-link" data-service="writing">Internship Reports</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <ul>
+                        <li><i class="fas fa-envelope"></i> info@edusuccess.cm</li>
+                        <li><i class="fas fa-phone"></i> +237 686 940 697</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Buea, Cameroon</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2025 EduSuccess. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot-container">
+        <div class="chatbot-icon" id="chatbotIcon">
+            <i class="fas fa-robot"></i>
+        </div>
+        
+        <div class="chatbot-window" id="chatbotWindow">
+            <div class="chatbot-header">
+                <h3>EduSuccess Assistant</h3>
+                <div class="chatbot-close" id="chatbotClose">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">
+                    Hello! I'm your EduSuccess assistant. How can I help you today?
+                </div>
+            </div>
+            
+            <div class="chatbot-input">
+                <input type="text" id="chatbotInput" placeholder="Type your message...">
+                <button id="chatbotSend"><i class="fas fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal" id="loginModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Login to Your Account</h2>
+                <div class="modal-close" id="loginClose">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Password</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+            
+            <p style="text-align: center; margin-top: 15px;">
+                Don't have an account? <a href="#" id="switchToRegister" style="color: var(--primary);">Register here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal" id="registerModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Create an Account</h2>
+                <div class="modal-close" id="registerClose">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="registerName">Full Name</label>
+                    <input type="text" id="registerName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerEmail">Email Address</label>
+                    <input type="email" id="registerEmail" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPhone">Phone Number</label>
+                    <input type="tel" id="registerPhone" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerInstitution">Educational Institution</label>
+                    <input type="text" id="registerInstitution" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerLevel">Level of Education</label>
+                    <select id="registerLevel" required>
+                        <option value="">Select your level</option>
+                        <option value="HND">HND</option>
+                        <option value="B.Tech">B.Tech</option>
+                        <option value="BSc">BSc</option>
+                        <option value="Masters">Masters</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerPassword">Password</label>
+                    <input type="password" id="registerPassword" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="registerConfirm">Confirm Password</label>
+                    <input type="password" id="registerConfirm" required>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Create Account</button>
+            </form>
+            
+            <p style="text-align: center; margin-top: 15px;">
+                Already have an account? <a href="#" id="switchToLogin" style="color: var(--primary);">Login here</a>
+            </p>
+        </div>
+    </div>
+
+    <!-- Service Modals -->
+    <div class="modal" id="cvModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>CV, Resume & Cover Letter Services</h2>
+                <div class="modal-close" data-modal="cvModal">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            
+            <form id="cvForm">
+                <div class="form-group">
+                    <label for="cvName">Full Name</label>
+                    <input type="text" id="cvName" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="cvEmail">Email Address</label>
+                        <input type="email" id="cvEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="cvPhone">Phone Number</label>
+                        <input type="tel" id="cvPhone" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cvLevel">Level of Education</label>
+                    <select id="cvLevel" required>
+                        <option value="">Select your level</option>
+                        <option value="HND">HND</option>
+                        <option value="B.Tech">B.Tech</option>
+                        <option value="BSc">BSc</option>
+                        <option value="Masters">Masters</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Select Services Needed</label>
+                    <div class="service-options">
+                        <div class="service-option" data-service="cv" data-price="10000">
+                            <h4>CV Design</h4>
+                            <p>Professional CV creation</p>
+                            <div class="price">10,000 FCFA</div>
+                        </div>
+                        
+                        <div class="service-option" data-service="resume" data-price="10000">
+                            <h4>Resume Design</h4>
+                            <p>Professional resume creation</p>
+                            <div class="price">10,000 FCFA</div>
+                        </div>
+                        
+                        <div class="service-option" data-service="cover" data-price="5000">
+                            <h4>Cover Letter</h4>
+                            <p>Custom cover letter writing</p>
+                            <div class="price">5,000 FCFA</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="cvDetails">Additional Details & Requirements</label>
+                    <textarea id="cvDetails" placeholder="Please provide any specific requirements, target industry, or other details..."></textarea>
+                </div>
+                
+                <div class="price-display">
+                    <h3>Total Cost</h3>
+                    <div class="price-amount">0 FCFA</div>
+                    <p>Select services above to see pricing</p>
+                </div>
+                
+                <button type="submit" class="btn btn-success" style="width: 100%;">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="designModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Project Design Services</h2>
+                <div class="modal-close" data-modal="designModal">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            
+            <form id="designForm">
+                <div class="form-group">
+                    <label for="designName">Full Name</label>
+                    <input type="text" id="designName" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="designEmail">Email Address</label>
+                        <input type="email" id="designEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="designPhone">Phone Number</label>
+                        <input type="tel" id="designPhone" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="designLevel">Level of Education</label>
+                    <select id="designLevel" required>
+                        <option value="">Select your level</option>
+                        <option value="HND">HND</option>
+                        <option value="B.Tech">B.Tech</option>
+                        <option value="BSc">BSc</option>
+                        <option value="Masters">Masters</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="designTopic">Project Topic/Title</label>
+                    <input type="text" id="designTopic" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="designField">Field of Study</label>
+                    <input type="text" id="designField" required placeholder="e.g., Software Engineering, Computer Science">
+                </div>
+                
+                <div class="form-group">
+                    <label for="designComplexity">Project Complexity</label>
+                    <select id="designComplexity">
+                        <option value="simple">Simple</option>
+                        <option value="medium" selected>Medium</option>
+                        <option value="complex">Complex</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="designDetails">Project Details & Requirements</label>
+                    <textarea id="designDetails" placeholder="Please describe your project requirements, technologies to use, and any specific features needed..."></textarea>
+                </div>
+                
+                <div class="price-display">
+                    <h3>Estimated Cost</h3>
+                    <div class="price-amount">0 FCFA</div>
+                    <p>Price will be calculated based on your level and complexity</p>
+                </div>
+                
+                <div class="invoice-preview">
+                    <h3>Invoice Preview</h3>
+                    <div class="invoice-item">
+                        <span>Project Design Service</span>
+                        <span>0 FCFA</span>
+                    </div>
+                    <div class="invoice-total">
+                        <span>Total</span>
+                        <span>0 FCFA</span>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-success" style="width: 100%;">Submit Request & Get Invoice via WhatsApp</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="modal" id="writingModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Project & Report Writing Services</h2>
+                <div class="modal-close" data-modal="writingModal">
+                    <i class="fas fa-times"></i>
+                </div>
+            </div>
+            
+            <form id="writingForm">
+                <div class="form-group">
+                    <label for="writingName">Full Name</label>
+                    <input type="text" id="writingName" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="writingEmail">Email Address</label>
+                        <input type="email" id="writingEmail" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="writingPhone">Phone Number</label>
+                        <input type="tel" id="writingPhone" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="writingLevel">Level of Education</label>
+                    <select id="writingLevel" required>
+                        <option value="">Select your level</option>
+                        <option value="HND">HND</option>
+                        <option value="B.Tech">B.Tech</option>
+                        <option value="BSc">BSc</option>
+                        <option value="Masters">Masters</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="writingType">Type of Work Needed</label>
+                    <select id="writingType" required>
+                        <option value="">Select type</option>
+                        <option value="report">Internship Report</option>
+                        <option value="project">Project Writing</option>
+                        <option value="both">Both Report & Project</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="writingTopic">Project/Report Topic</label>
+                    <input type="text" id="writingTopic" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="writingField">Field of Study</label>
+                    <input type="text" id="writingField" required placeholder="e.g., Software Engineering, Computer Science">
+                </div>
+                
+                <div class="form-group">
+                    <label for="writingDetails">Project/Report Details & Requirements</label>
+                    <textarea id="writingDetails" placeholder="Please provide details about your project, specific requirements, chapter outlines, and any guidelines from your institution..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="writingDeadline">Deadline</label>
+                    <input type="date" id="writingDeadline" required>
+                </div>
+                
+                <div class="price-display">
+                    <h3>Total Cost</h3>
+                    <div class="price-amount">0 FCFA</div>
+                    <p>Price will be calculated based on your level and service type</p>
+                </div>
+                
+                <div class="invoice-preview">
+                    <h3>Invoice Preview</h3>
+                    <div class="invoice-item">
+                        <span>Service</span>
+                        <span>Price</span>
+                    </div>
+                    <div class="invoice-item" id="writingServiceItem">
+                        <span>-</span>
+                        <span>0 FCFA</span>
+                    </div>
+                    <div class="invoice-item" id="writingDiscountItem" style="display: none;">
+                        <span>Discount</span>
+                        <span>0 FCFA</span>
+                    </div>
+                    <div class="invoice-total">
+                        <span>Total</span>
+                        <span id="writingTotal">0 FCFA</span>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-success" style="width: 100%;">Submit Request & Get Invoice via WhatsApp</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Mobile Menu Toggle
+        document.querySelector('.mobile-menu').addEventListener('click', function() {
+            document.querySelector('.nav-menu').classList.toggle('active');
+        });
+
+        // FAQ Toggle
+        const faqItems = document.querySelectorAll('.faq-item');
+        faqItems.forEach(item => {
+            item.querySelector('.faq-question').addEventListener('click', () => {
+                item.classList.toggle('active');
+            });
+        });
+
+        // Modal Functionality
+        const loginBtn = document.getElementById('loginBtn');
+        const registerBtn = document.getElementById('registerBtn');
+        const loginModal = document.getElementById('loginModal');
+        const registerModal = document.getElementById('registerModal');
+        const loginClose = document.getElementById('loginClose');
+        const registerClose = document.getElementById('registerClose');
+        const switchToRegister = document.getElementById('switchToRegister');
+        const switchToLogin = document.getElementById('switchToLogin');
+
+        loginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+        });
+
+        registerBtn.addEventListener('click', () => {
+            registerModal.style.display = 'flex';
+        });
+
+        loginClose.addEventListener('click', () => {
+            loginModal.style.display = 'none';
+        });
+
+        registerClose.addEventListener('click', () => {
+            registerModal.style.display = 'none';
+        });
+
+        switchToRegister.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'none';
+            registerModal.style.display = 'flex';
+        });
+
+        switchToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            registerModal.style.display = 'none';
+            loginModal.style.display = 'flex';
+        });
+
+        // Get Started buttons - open registration modal
+document.getElementById('heroGetStarted').addEventListener('click', () => {
+    registerModal.style.display = 'flex';
+});
+
+document.getElementById('ctaGetStarted').addEventListener('click', () => {
+    registerModal.style.display = 'flex';
+});
+
+        // Service Modal Functionality
+        const serviceButtons = document.querySelectorAll('.service-btn, .service-link');
+        const serviceModals = {
+            'cv': document.getElementById('cvModal'),
+            'design': document.getElementById('designModal'),
+            'writing': document.getElementById('writingModal')
+        };
+
+        serviceButtons.forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.preventDefault();
+                const service = button.getAttribute('data-service');
+                if (serviceModals[service]) {
+                    serviceModals[service].style.display = 'flex';
+                }
+            });
+        });
+
+        // Close modals when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+
+        // Close modals with close buttons
+        document.querySelectorAll('.modal-close').forEach(closeBtn => {
+            closeBtn.addEventListener('click', function() {
+                const modalId = this.getAttribute('data-modal');
+                if (modalId) {
+                    document.getElementById(modalId).style.display = 'none';
+                } else {
+                    this.closest('.modal').style.display = 'none';
+                }
+            });
+        });
+
+        // CV Service Selection
+        const cvOptions = document.querySelectorAll('#cvModal .service-option');
+        let cvSelectedServices = [];
+        let cvTotalPrice = 0;
+
+        cvOptions.forEach(option => {
+            option.addEventListener('click', function() {
+                this.classList.toggle('selected');
+                
+                const service = this.getAttribute('data-service');
+                const price = parseInt(this.getAttribute('data-price'));
+                
+                if (this.classList.contains('selected')) {
+                    cvSelectedServices.push({service, price});
+                } else {
+                    cvSelectedServices = cvSelectedServices.filter(item => item.service !== service);
+                }
+                
+                // Calculate total
+                cvTotalPrice = cvSelectedServices.reduce((total, item) => total + item.price, 0);
+                
+                // Apply discount for all three services
+                if (cvSelectedServices.length === 3) {
+                    cvTotalPrice = 22000; // Discounted price
+                }
+                
+                // Update display
+                const priceDisplay = document.querySelector('#cvModal .price-amount');
+                priceDisplay.textContent = cvTotalPrice.toLocaleString() + ' FCFA';
+                
+                if (cvSelectedServices.length === 3) {
+                    priceDisplay.innerHTML = '<span class="original-price">25,000 FCFA</span> ' + cvTotalPrice.toLocaleString() + ' FCFA <span class="discount-badge">Save 3,000 FCFA</span>';
+                }
+            });
+        });
+
+        // Project Design Pricing
+        const designLevel = document.getElementById('designLevel');
+        const designComplexity = document.getElementById('designComplexity');
+        
+        function updateDesignPrice() {
+            const level = designLevel.value;
+            const complexity = designComplexity.value;
+            let price = 0;
+            
+            if (level === 'HND') {
+                price = 35000;
+            } else if (level === 'B.Tech' || level === 'BSc') {
+                if (complexity === 'simple') price = 80000;
+                else if (complexity === 'medium') price = 100000;
+                else if (complexity === 'complex') price = 130000;
+            } else if (level === 'Masters') {
+                price = 200000;
+            }
+            
+            const priceDisplay = document.querySelector('#designModal .price-amount');
+            priceDisplay.textContent = price.toLocaleString() + ' FCFA';
+            
+            // Update invoice preview
+            const invoiceItem = document.querySelector('#designModal .invoice-item span:last-child');
+            const invoiceTotal = document.querySelector('#designModal .invoice-total span:last-child');
+            
+            invoiceItem.textContent = price.toLocaleString() + ' FCFA';
+            invoiceTotal.textContent = price.toLocaleString() + ' FCFA';
+        }
+        
+        designLevel.addEventListener('change', updateDesignPrice);
+        designComplexity.addEventListener('change', updateDesignPrice);
+
+        // Project Writing Pricing
+        const writingLevel = document.getElementById('writingLevel');
+        const writingType = document.getElementById('writingType');
+        
+        function updateWritingPrice() {
+            const level = writingLevel.value;
+            const type = writingType.value;
+            let reportPrice = 0;
+            let projectPrice = 0;
+            let totalPrice = 0;
+            let discount = 0;
+            
+            // Set base prices based on level
+            if (level === 'HND') {
+                reportPrice = 30000;
+                projectPrice = 35000;
+            } else if (level === 'B.Tech' || level === 'BSc') {
+                reportPrice = 40000;
+                projectPrice = 50000;
+            } else if (level === 'Masters') {
+                reportPrice = 80000;
+                projectPrice = 100000;
+            }
+            
+            // Calculate total based on service type
+            if (type === 'report') {
+                totalPrice = reportPrice;
+            } else if (type === 'project') {
+                totalPrice = projectPrice;
+            } else if (type === 'both') {
+                totalPrice = reportPrice + projectPrice;
+                // Apply discounts
+                if (level === 'HND') {
+                    totalPrice = 60000; // Fixed discount for HND
+                    discount = (reportPrice + projectPrice) - totalPrice;
+                } else {
+                    discount = Math.round((reportPrice + projectPrice) * 0.1);
+                    totalPrice = (reportPrice + projectPrice) - discount;
+                }
+            }
+            
+            // Update display
+            const priceDisplay = document.querySelector('#writingModal .price-amount');
+            priceDisplay.textContent = totalPrice.toLocaleString() + ' FCFA';
+            
+            // Update invoice preview
+            const serviceItem = document.querySelector('#writingServiceItem');
+            const discountItem = document.querySelector('#writingDiscountItem');
+            const totalElement = document.querySelector('#writingTotal');
+            
+            if (type === 'report') {
+                serviceItem.innerHTML = `<span>Internship Report Writing</span><span>${reportPrice.toLocaleString()} FCFA</span>`;
+                discountItem.style.display = 'none';
+            } else if (type === 'project') {
+                serviceItem.innerHTML = `<span>Project Writing</span><span>${projectPrice.toLocaleString()} FCFA</span>`;
+                discountItem.style.display = 'none';
+            } else if (type === 'both') {
+                serviceItem.innerHTML = `
+                    <div>
+                        <div>Internship Report Writing</div>
+                        <div>Project Writing</div>
+                    </div>
+                    <div>
+                        <div>${reportPrice.toLocaleString()} FCFA</div>
+                        <div>${projectPrice.toLocaleString()} FCFA</div>
+                    </div>
+                `;
+                discountItem.innerHTML = `<span>Discount</span><span>-${discount.toLocaleString()} FCFA</span>`;
+                discountItem.style.display = 'flex';
+            }
+            
+            totalElement.textContent = totalPrice.toLocaleString() + ' FCFA';
+        }
+        
+        writingLevel.addEventListener('change', updateWritingPrice);
+        writingType.addEventListener('change', updateWritingPrice);
+
+        // Form Submissions with WhatsApp Integration
+        document.getElementById('cvForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            submitToWhatsApp('CV Services', cvSelectedServices, cvTotalPrice, this);
+        });
+
+        document.getElementById('designForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const level = document.getElementById('designLevel').value;
+            const topic = document.getElementById('designTopic').value;
+            const field = document.getElementById('designField').value;
+            const complexity = document.getElementById('designComplexity').value;
+            const details = document.getElementById('designDetails').value;
+            const price = document.querySelector('#designModal .price-amount').textContent;
+            
+            const serviceDetails = {
+                service: 'Project Design',
+                level: level,
+                topic: topic,
+                field: field,
+                complexity: complexity,
+                details: details,
+                price: price
+            };
+            
+            submitToWhatsApp('Project Design', serviceDetails, price, this);
+        });
+
+        document.getElementById('writingForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const level = document.getElementById('writingLevel').value;
+            const type = document.getElementById('writingType').value;
+            const topic = document.getElementById('writingTopic').value;
+            const field = document.getElementById('writingField').value;
+            const details = document.getElementById('writingDetails').value;
+            const deadline = document.getElementById('writingDeadline').value;
+            const price = document.querySelector('#writingModal .price-amount').textContent;
+            
+            const serviceDetails = {
+                service: 'Project Writing',
+                level: level,
+                type: type,
+                topic: topic,
+                field: field,
+                details: details,
+                deadline: deadline,
+                price: price
+            };
+            
+            submitToWhatsApp('Project Writing', serviceDetails, price, this);
+        });
+
+        function submitToWhatsApp(serviceType, serviceDetails, totalPrice, form) {
+            // Get form data
+            const name = form.querySelector('input[type="text"]').value;
+            const email = form.querySelector('input[type="email"]').value;
+            const phone = form.querySelector('input[type="tel"]').value;
+            
+            // Create message
+            let message = `Hello EduSuccess! I would like to request ${serviceType} services.\n\n`;
+            message += `Name: ${name}\n`;
+            message += `Email: ${email}\n`;
+            message += `Phone: ${phone}\n\n`;
+            
+            if (serviceType === 'CV Services') {
+                message += `Services Requested: ${serviceDetails.map(s => s.service).join(', ')}\n`;
+                message += `Total: ${totalPrice} FCFA\n\n`;
+            } else {
+                message += `Educational Level: ${serviceDetails.level}\n`;
+                message += `Project Topic: ${serviceDetails.topic}\n`;
+                message += `Field: ${serviceDetails.field}\n`;
+                
+                if (serviceType === 'Project Design') {
+                    message += `Complexity: ${serviceDetails.complexity}\n`;
+                } else if (serviceType === 'Project Writing') {
+                    message += `Service Type: ${serviceDetails.type}\n`;
+                    message += `Deadline: ${serviceDetails.deadline}\n`;
+                }
+                
+                message += `Total: ${serviceDetails.price}\n\n`;
+                message += `Additional Details: ${serviceDetails.details}\n\n`;
+            }
+            
+            message += `Please send me the payment details and next steps. Thank you!`;
+            
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // WhatsApp URL (replace with your business number)
+            const whatsappUrl = `https://wa.me/237686940697?text=${encodedMessage}`;
+            
+            // Open WhatsApp
+            window.open(whatsappUrl, '_blank');
+            
+            // Close modal
+            form.closest('.modal').style.display = 'none';
+            
+            // Show confirmation
+            alert('Your request has been submitted! You will be redirected to WhatsApp to complete the process.');
+        }
+
+        // Chatbot Functionality
+        const chatbotIcon = document.getElementById('chatbotIcon');
+        const chatbotWindow = document.getElementById('chatbotWindow');
+        const chatbotClose = document.getElementById('chatbotClose');
+        const chatbotMessages = document.getElementById('chatbotMessages');
+        const chatbotInput = document.getElementById('chatbotInput');
+        const chatbotSend = document.getElementById('chatbotSend');
+
+        chatbotIcon.addEventListener('click', () => {
+            chatbotWindow.style.display = 'flex';
+        });
+
+        chatbotClose.addEventListener('click', () => {
+            chatbotWindow.style.display = 'none';
+        });
+
+        chatbotSend.addEventListener('click', sendMessage);
+        chatbotInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+
+        function sendMessage() {
+            const message = chatbotInput.value.trim();
+            if (message === '') return;
+
+            // Add user message
+            addMessage(message, 'user');
+            chatbotInput.value = '';
+
+            // Simulate bot response
+            setTimeout(() => {
+                const botResponse = generateBotResponse(message);
+                addMessage(botResponse, 'bot');
+            }, 1000);
+        }
+
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.classList.add('message');
+            messageDiv.classList.add(sender === 'user' ? 'user-message' : 'bot-message');
+            messageDiv.textContent = text;
+            chatbotMessages.appendChild(messageDiv);
+            chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+        }
+
+        function generateBotResponse(message) {
+            const lowerMessage = message.toLowerCase();
+            
+            if (lowerMessage.includes('price') || lowerMessage.includes('cost')) {
+                return "Our pricing varies based on the service and level. HND reports are 30,000 FCFA, HND projects 35,000 FCFA. B.Tech/BSc projects start from 50,000 FCFA. Masters projects are 100,000 FCFA. Would you like more specific pricing information?";
+            } else if (lowerMessage.includes('time') || lowerMessage.includes('duration') || lowerMessage.includes('how long')) {
+                return "CV/resume services typically take 2-3 days. Projects may take 2-4 weeks depending on complexity. We provide a specific timeline after reviewing your requirements.";
+            } else if (lowerMessage.includes('payment') || lowerMessage.includes('pay') || lowerMessage.includes('money')) {
+                return "We accept MTN Mobile Money and Orange Money. Payment is required before we begin work on your project.";
+            } else if (lowerMessage.includes('grade') || lowerMessage.includes('mark') || lowerMessage.includes('score')) {
+                return "While we provide high-quality work following academic standards, final grades depend on multiple factors including your institution's requirements and your defense performance.";
+            } else if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
+                return "Hello! How can I assist you with our academic services today?";
+            } else if (lowerMessage.includes('service') || lowerMessage.includes('help') || lowerMessage.includes('support')) {
+                return "We offer CV/resume design, project design and development, and project/report writing services for HND, B.Tech, BSc, and Masters students. Which service are you interested in?";
+            } else if (lowerMessage.includes('discount')) {
+                return "We offer discounts for combined services! For example, HND report + project is 60,000 FCFA instead of 65,000. B.Tech/BSc combined services get 10% off. Masters combined services also get 10% off.";
+            } else {
+                return "I'm here to help with information about our academic services. You can ask me about pricing, timelines, payment methods, or our different service offerings.";
+            }
+        }
+
+        // Login and Register Form Submissions
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Login functionality will be implemented in the backend.');
+            loginModal.style.display = 'none';
+        });
+
+        document.getElementById('registerForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Registration functionality will be implemented in the backend.');
+            registerModal.style.display = 'none';
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+       // ==================== BACKEND INTEGRATION ====================
+const API_BASE_URL = 'http://localhost:5000/api';
+
+// Auth functions
+const auth = {
+  setToken(token) {
+    localStorage.setItem('edusuccess_token', token);
+  },
+  getToken() {
+    return localStorage.getItem('edusuccess_token');
+  },
+  removeToken() {
+    localStorage.removeItem('edusuccess_token');
+  },
+  isLoggedIn() {
+    return !!this.getToken();
+  }
+};
+
+// Update registration form
+document.getElementById('registerForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  const formData = {
+    name: document.getElementById('registerName').value,
+    email: document.getElementById('registerEmail').value,
+    phone: document.getElementById('registerPhone').value,
+    institution: document.getElementById('registerInstitution').value,
+    education_level: document.getElementById('registerLevel').value,
+    password: document.getElementById('registerPassword').value
+  };
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/auth/register`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      auth.setToken(data.data.token);
+      alert('Registration successful!');
+      registerModal.style.display = 'none';
+      updateAuthUI();
+    } else {
+      alert('Registration failed: ' + data.message);
+    }
+  } catch (error) {
+    alert('Registration failed. Please try again.');
+  }
+});
+
+// Update login form
+document.getElementById('loginForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  
+  const formData = {
+    email: document.getElementById('loginEmail').value,
+    password: document.getElementById('loginPassword').value
+  };
+
+  try {
+    const response = await fetch(`${API_BASE_URL}/auth/login`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    });
+
+    const data = await response.json();
+
+    if (data.success) {
+      auth.setToken(data.data.token);
+      alert('Login successful!');
+      loginModal.style.display = 'none';
+      updateAuthUI();
+    } else {
+      alert('Login failed: ' + data.message);
+    }
+  } catch (error) {
+    alert('Login failed. Please try again.');
+  }
+});
+
+// Check authentication before service
+function checkAuthBeforeService() {
+  if (!auth.isLoggedIn()) {
+    alert('Please login or register to use our services');
+    registerModal.style.display = 'flex';
+    return false;
+  }
+  return true;
+}
+
+// Update service forms to require authentication
+document.getElementById('cvForm').addEventListener('submit', function(e) {
+  if (!checkAuthBeforeService()) {
+    e.preventDefault();
+  }
+});
+
+document.getElementById('designForm').addEventListener('submit', function(e) {
+  if (!checkAuthBeforeService()) {
+    e.preventDefault();
+  }
+});
+
+document.getElementById('writingForm').addEventListener('submit', function(e) {
+  if (!checkAuthBeforeService()) {
+    e.preventDefault();
+  }
+});
+
+// Update UI based on login status
+function updateAuthUI() {
+  const loginBtn = document.getElementById('loginBtn');
+  const registerBtn = document.getElementById('registerBtn');
+  
+  if (auth.isLoggedIn()) {
+    loginBtn.textContent = 'My Account';
+    registerBtn.textContent = 'Logout';
+    
+    registerBtn.onclick = function() {
+      auth.removeToken();
+      updateAuthUI();
+      alert('Logged out successfully');
+    };
+  } else {
+    loginBtn.textContent = 'Login';
+    registerBtn.textContent = 'Register';
+    
+    loginBtn.onclick = () => loginModal.style.display = 'flex';
+    registerBtn.onclick = () => registerModal.style.display = 'flex';
+  }
+}
+
+// Update "Get Started" buttons to open registration
+document.getElementById('heroGetStarted').addEventListener('click', () => {
+  registerModal.style.display = 'flex';
+});
+
+document.getElementById('ctaGetStarted').addEventListener('click', () => {
+  registerModal.style.display = 'flex';
+});
+
+// Check auth status on page load
+updateAuthUI();
+
+
+
+// ==================== SERVICE REQUEST TO BACKEND + WHATSAPP ====================
+
+// Function to submit service request to backend and WhatsApp
+async function submitServiceRequest(serviceType, formData, totalPrice, formElement) {
+    try {
+        // DOUBLE CHECK AUTHENTICATION
+        if (!auth.isLoggedIn()) {
+            alert('Please login or register to use our services');
+            registerModal.style.display = 'flex';
+            return;
+        }
+
+        // 1. Submit to backend
+        const backendPayload = {
+            service_type: serviceType,
+            service_data: formData,
+            total_price: parseFloat(totalPrice)
+        };
+
+        console.log('Sending to backend:', backendPayload);
+
+        const response = await fetch(`${API_BASE_URL}/services/request`, {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${auth.getToken()}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(backendPayload)
+        });
+
+        const data = await response.json();
+        console.log('Backend response:', data);
+
+        if (data.success) {
+            // 2. Only send to WhatsApp if backend save is successful
+            sendToWhatsApp(serviceType, formData, totalPrice);
+            
+            // Close modal
+            formElement.closest('.modal').style.display = 'none';
+            
+            // Reset form
+            formElement.reset();
+            
+            alert('Service request submitted successfully! Check WhatsApp for payment details.');
+        } else {
+            alert('Failed to save service request: ' + data.message);
+        }
+    } catch (error) {
+        console.error('Service request error:', error);
+        alert('Error submitting service request. Please try again.');
+    }
+}
+
+// Function to send to WhatsApp
+function sendToWhatsApp(serviceType, formData, totalPrice) {
+    let message = `Hello EduSuccess! I would like to request ${serviceType} services.\n\n`;
+    
+    // Common fields
+    message += `Name: ${formData.name}\n`;
+    message += `Email: ${formData.email}\n`;
+    message += `Phone: ${formData.phone}\n`;
+    message += `Educational Level: ${formData.level}\n`;
+    
+    // Service-specific fields
+    if (serviceType === 'cv') {
+        message += `Services: ${formData.selectedServices.join(', ')}\n`;
+    } else {
+        message += `Project Topic: ${formData.topic}\n`;
+        message += `Field: ${formData.field}\n`;
+        
+        if (serviceType === 'design') {
+            message += `Complexity: ${formData.complexity}\n`;
+        } else if (serviceType === 'writing') {
+            message += `Service Type: ${formData.serviceType}\n`;
+            if (formData.deadline) {
+                message += `Deadline: ${formData.deadline}\n`;
+            }
+        }
+        
+        if (formData.details) {
+            message += `Details: ${formData.details}\n`;
+        }
+    }
+    
+    message += `\nTotal Price: ${totalPrice} FCFA\n\n`;
+    message += `Please send me payment details via mobile money. Thank you!`;
+    
+    // Encode message for URL
+    const encodedMessage = encodeURIComponent(message);
+    
+    // REPLACE WITH YOUR WHATSAPP NUMBER
+    const whatsappUrl = `https://wa.me/237686940697?text=${encodedMessage}`;
+    
+    // Open WhatsApp
+    window.open(whatsappUrl, '_blank');
+}
+
+// CV Form Submission - UPDATED
+document.getElementById('cvForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    // Check authentication first
+    if (!auth.isLoggedIn()) {
+        alert('Please login or register to use our services');
+        registerModal.style.display = 'flex';
+        return;
+    }
+    
+    const formData = {
+        name: document.getElementById('cvName').value,
+        email: document.getElementById('cvEmail').value,
+        phone: document.getElementById('cvPhone').value,
+        level: document.getElementById('cvLevel').value,
+        selectedServices: cvSelectedServices.map(s => s.service),
+        details: document.getElementById('cvDetails').value
+    };
+    
+    const totalPrice = cvTotalPrice;
+    
+    await submitServiceRequest('cv', formData, totalPrice, this);
+});
+
+// Design Form Submission - UPDATED
+document.getElementById('designForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    // Check authentication first
+    if (!auth.isLoggedIn()) {
+        alert('Please login or register to use our services');
+        registerModal.style.display = 'flex';
+        return;
+    }
+    
+    const formData = {
+        name: document.getElementById('designName').value,
+        email: document.getElementById('designEmail').value,
+        phone: document.getElementById('designPhone').value,
+        level: document.getElementById('designLevel').value,
+        topic: document.getElementById('designTopic').value,
+        field: document.getElementById('designField').value,
+        complexity: document.getElementById('designComplexity').value,
+        details: document.getElementById('designDetails').value
+    };
+    
+    const priceText = document.querySelector('#designModal .price-amount').textContent;
+    const totalPrice = parseFloat(priceText.replace(/[^0-9.]/g, ''));
+    
+    await submitServiceRequest('design', formData, totalPrice, this);
+});
+
+// Writing Form Submission - UPDATED
+document.getElementById('writingForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    
+    // Check authentication first
+    if (!auth.isLoggedIn()) {
+        alert('Please login or register to use our services');
+        registerModal.style.display = 'flex';
+        return;
+    }
+    
+    const formData = {
+        name: document.getElementById('writingName').value,
+        email: document.getElementById('writingEmail').value,
+        phone: document.getElementById('writingPhone').value,
+        level: document.getElementById('writingLevel').value,
+        serviceType: document.getElementById('writingType').value,
+        topic: document.getElementById('writingTopic').value,
+        field: document.getElementById('writingField').value,
+        details: document.getElementById('writingDetails').value,
+        deadline: document.getElementById('writingDeadline').value
+    };
+    
+    const priceText = document.querySelector('#writingModal .price-amount').textContent;
+    const totalPrice = parseFloat(priceText.replace(/[^0-9.]/g, ''));
+    
+    await submitServiceRequest('writing', formData, totalPrice, this);
+});
+
+// Remove the old checkAuthBeforeService function since we're doing direct checks now
+// Delete this function if it exists elsewhere in your code:
+/*
+function checkAuthBeforeService() {
+    if (!auth.isLoggedIn()) {
+        alert('Please login or register to use our services');
+        registerModal.style.display = 'flex';
+        return false;
+    }
+    return true;
+}
+*/
+    </script>
+</body>
+</html>
