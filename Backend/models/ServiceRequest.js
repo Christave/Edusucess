@@ -8,14 +8,17 @@ class ServiceRequest {
     return new Promise((resolve, reject) => {
       const query = `
         INSERT INTO service_requests (user_id, service_type, service_data, total_price) 
-        VALUES ($1, $2, $3, $4) RETURNING *
+        VALUES (?, ?, ?, ?)
       `;
       
-      db.query(query, [user_id, service_type, JSON.stringify(service_data), total_price], (err, result) => {
+      // Convert service_data to JSON string for storage
+      const serviceDataString = JSON.stringify(service_data);
+      
+      db.query(query, [user_id, service_type, serviceDataString, total_price], (err, result) => {
         if (err) {
           reject(err);
         } else {
-          resolve(result.rows[0]);
+          resolve({ id: result.insertId, ...serviceData });
         }
       });
     });
@@ -24,14 +27,14 @@ class ServiceRequest {
   // Get user's service requests
   static async findByUserId(userId) {
     return new Promise((resolve, reject) => {
-      const query = 'SELECT * FROM service_requests WHERE user_id = $1 ORDER BY created_at DESC';
+      const query = 'SELECT * FROM service_requests WHERE user_id = ? ORDER BY created_at DESC';
       
-      db.query(query, [userId], (err, result) => {
+      db.query(query, [userId], (err, results) => {
         if (err) {
           reject(err);
         } else {
-          // Parse JSON service_data
-          const parsedResults = result.rows.map(row => ({
+          // Parse JSON service_data from TEXT field
+          const parsedResults = results.map(row => ({
             ...row,
             service_data: JSON.parse(row.service_data)
           }));

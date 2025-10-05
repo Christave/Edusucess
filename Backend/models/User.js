@@ -12,14 +12,14 @@ class User {
     return new Promise((resolve, reject) => {
       const query = `
         INSERT INTO users (name, email, phone, institution, education_level, password) 
-        VALUES ($1, $2, $3, $4, $5, $6) RETURNING *
+        VALUES (?, ?, ?, ?, ?, ?)
       `;
       
       db.query(query, [name, email, phone, institution, education_level, hashedPassword], (err, result) => {
         if (err) {
           reject(err);
         } else {
-          resolve(result.rows[0]);
+          resolve({ id: result.insertId, ...userData });
         }
       });
     });
@@ -28,13 +28,13 @@ class User {
   // Find user by email
   static async findByEmail(email) {
     return new Promise((resolve, reject) => {
-      const query = 'SELECT * FROM users WHERE email = $1';
+      const query = 'SELECT * FROM users WHERE email = ?';
       
-      db.query(query, [email], (err, result) => {
+      db.query(query, [email], (err, results) => {
         if (err) {
           reject(err);
         } else {
-          resolve(result.rows[0]);
+          resolve(results[0]);
         }
       });
     });
@@ -43,13 +43,13 @@ class User {
   // Find user by ID
   static async findById(id) {
     return new Promise((resolve, reject) => {
-      const query = 'SELECT id, name, email, phone, institution, education_level, created_at FROM users WHERE id = $1';
+      const query = 'SELECT id, name, email, phone, institution, education_level, created_at FROM users WHERE id = ?';
       
-      db.query(query, [id], (err, result) => {
+      db.query(query, [id], (err, results) => {
         if (err) {
           reject(err);
         } else {
-          resolve(result.rows[0]);
+          resolve(results[0]);
         }
       });
     });

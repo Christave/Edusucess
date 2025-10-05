@@ -17,7 +17,7 @@ db.getConnection((err, connection) => {
     console.error('Database connection failed: ', err);
     return;
   }
-  console.log('Connected to MySQL database');
+  console.log('Connected to PlanetScale MySQL database');
   connection.release();
 });
 
@@ -27,10 +27,10 @@ app.use('/api/services', require('./routes/services'));
 
 // Basic route
 app.get('/', (req, res) => {
-  res.json({ message: 'EduSuccess Backend API' });
+  res.json({ message: 'EduSuccess Backend API - Production' });
 });
 
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 10000;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
